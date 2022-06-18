@@ -20,5 +20,5 @@ use App\Http\Controllers\TransactionController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/transaction', TransactionController::class);
-Route::post('/register', [LoginController::class, 'index']);
+Route::resource('/transaction', TransactionController::class)->middleware('auth');
+Route::post('/register', [LoginController::class, 'register']);
