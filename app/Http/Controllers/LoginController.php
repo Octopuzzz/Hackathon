@@ -45,10 +45,12 @@ class LoginController extends Controller
         $user =  User::all()->where('email', $request->email);
         foreach ($user as $u) {
             if (Hash::check($request->password, $u->password)) {
+                $Token = $u->createToken('MyApp')->plainTextToken;
                 $response = [
                     'message' => 'User logged in successfully',
                     'user' => $u,
                 ];
+                $u->Token = $Token;
                 return response()->json($response, Response::HTTP_OK);
             }
         }
