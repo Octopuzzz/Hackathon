@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategeryFactory extends Factory
+class LikeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,9 @@ class CategeryFactory extends Factory
     public function definition()
     {
         return [
-            'category_type' => $this->faker->word(mt_rand(6, 10)),
-            'slug' => $this->faker->slug(),
+            'user_id' => mt_rand(1, 5),
+            'post_id' => mt_rand(1, 5),
+            'Total_Like' => mt_rand(5, 39)
         ];
     }
 }

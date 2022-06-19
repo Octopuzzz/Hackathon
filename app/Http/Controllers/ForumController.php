@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Tymon\JWTAuth\JWT;
-use App\Models\Categery;
 use Illuminate\Http\Request;
-use \Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class ForumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Categery::get();
-        return response()->json([
-            'message' => 'List of categories',
-            'data' => $categories
-        ], Response::HTTP_OK);
+        //
     }
 
     /**
