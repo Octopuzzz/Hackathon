@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\Foreach_;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
@@ -41,7 +42,16 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
         ]);
-        $user =  User::where('email', $request->emai)->first();
-        return response()->json([$user, $request->all()], Response::HTTP_OK);
+        $user =  User::all()->where('email', $request->email);
+        foreach ($user as $u) {
+            if (Hash::check($request->password, $u->password)) {
+                $response = [
+                    'message' => 'User logged in successfully',
+                    'user' => $u,
+                ];
+                return response()->json($response, Response::HTTP_OK);
+            }
+        }
+        return response()->json(['message' => 'Invalid credentials'], Response::HTTP_UNAUTHORIZED);
     }
 }
