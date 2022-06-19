@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +18,12 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/transaction', TransactionController::class)->middleware('auth');
+Route::resource('/transaction', TransactionController::class)->except('edit');
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/auth/category', [CategoryController::class, 'index']);
+// Route::post('/logout', [LoginController::class, 'logout']);
+// Route::get('/logout', );

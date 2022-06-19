@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class LoginController extends Controller
 {
+
     public function register(Request $request)
     {
         $request->validate([
@@ -26,7 +24,7 @@ class LoginController extends Controller
             [
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => $request->password,
             ]
         );
         $user->save();
@@ -43,6 +41,7 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
         ]);
-        $credentials = request(['email', 'password']);
+        $user =  User::where('email', $request->emai)->first();
+        return response()->json([$user, $request->all()], Response::HTTP_OK);
     }
 }
