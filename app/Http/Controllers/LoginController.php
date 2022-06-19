@@ -51,6 +51,7 @@ class LoginController extends Controller
                     'user' => $u,
                 ];
                 $u->Token = $Token;
+                $u->save();
                 return response()->json($response, Response::HTTP_OK);
             }
         }
