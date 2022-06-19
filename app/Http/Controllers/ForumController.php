@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Forum;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class ForumController extends Controller
 {
@@ -13,7 +17,11 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        $forums = Forum::get();
+        return response()->json([
+            'message' => 'List of forums',
+            'data' => $forums,
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -34,7 +42,7 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -45,7 +53,14 @@ class ForumController extends Controller
      */
     public function show($id)
     {
-        //
+        $forum = Forum::find($id);
+        return response()->json(
+            [
+                'message' => 'List of forums',
+                'data' => $forum
+            ],
+            Response::HTTP_OK
+        );
     }
 
     /**
