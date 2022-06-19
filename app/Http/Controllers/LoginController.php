@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Stmt\Foreach_;
+use Tymon\JWTAuth\Contracts\Providers\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
@@ -51,6 +52,7 @@ class LoginController extends Controller
                     'user' => $u,
                 ];
                 $u->Token = $Token;
+                auth()->login($u);
                 $u->save();
                 return response()->json($response, Response::HTTP_OK);
             }

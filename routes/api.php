@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -25,5 +26,6 @@ Route::resource('/transaction', TransactionController::class)->except('edit');
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/auth/category', [CategoryController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index']);
 // Route::post('/logout', [LoginController::class, 'logout']);
 // Route::get('/logout', );
